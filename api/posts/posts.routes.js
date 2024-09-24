@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const postsRouter = express.Router();
 const {
   fetchPost,
   postsGet,
@@ -8,7 +8,7 @@ const {
   postsCreate,
 } = require('./posts.controllers');
 
-router.param('postId', async (req, res, next, postId) => {
+postsRouter.param('postId', async (req, res, next, postId) => {
   const post = await fetchPost(postId, next);
   if (post) {
     req.post = post;
@@ -20,11 +20,11 @@ router.param('postId', async (req, res, next, postId) => {
   }
 });
 
-router.get('/', postsGet);
-router.post('/', postsCreate);
+postsRouter.get('/', postsGet);
+postsRouter.post('/:authorId', postsCreate);
 
-router.delete('/:postId', postsDelete);
+postsRouter.delete('/:postId', postsDelete);
 
-router.put('/:postId', postsUpdate);
+postsRouter.put('/:postId', postsUpdate);
 
-module.exports = router;
+module.exports = postsRouter;
