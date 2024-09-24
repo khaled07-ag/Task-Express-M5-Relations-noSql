@@ -5,6 +5,6 @@ const {getAllAuthors, createAuthor, updateAuthor, deleteAuthor} = require("./aut
 authorRouter.get("/", getAllAuthors);
 authorRouter.post("/", createAuthor);
 authorRouter.put("/:id", updateAuthor);
-authorRouter.delete("", deleteAuthor);
+authorRouter.delete("/:id", deleteAuthor);
 
 module.exports = authorRouter;
